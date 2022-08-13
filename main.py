@@ -11,13 +11,13 @@ st.write("""
 
 term = st.text_input("Enter a term to look up: ")
 if term == "":
-    st.write("Please enter a valid search term!")
+    st.info("Please enter a valid search term!")
 else:
     result = wikipedia.search(term, results=1)[0]
     page = wikipedia.page(result)
 
-    subheading = f"Wordcloud for the Wikipedia page {page.title}"
-    st.write(subheading)
+    freq_words_subheading = f"Most common words in the Wikipedia article {page.title}"
+    st.write(freq_words_subheading)
     content = page.content
 
     frequent_words = find_most_frequent_words(content)
@@ -30,6 +30,8 @@ else:
 
     st.markdown(words_to_display)
 
+    wordcloud_subheading = f"Wordcloud for the Wikipedia article {page.title}"
+    st.write(wordcloud_subheading)
     wordcloud = make_wordcloud(content)
     fig = plt.figure(figsize=(30, 30))
     plt.imshow(wordcloud)
